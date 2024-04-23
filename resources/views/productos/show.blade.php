@@ -39,7 +39,7 @@
         <h5>
             <a href="{{ route('product', $previous->slug ?? '') }}" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                 << {{ $previous->slug ?? '' }}</a> |
-            <a href="{{ route('product', $next->slug) }}" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+            <a href="{{ route('product', $next->slug) }}" class="link-secondary link-offset-2 link-underline-none link-underline-opacity-100-hover">
                 {{ $next->slug }} >></a>
         </h5>
     </div>

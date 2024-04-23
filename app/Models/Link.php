@@ -37,13 +37,7 @@ class Link extends Model
             $url = $this->url;
             
             $domainToPriceClass = [
-                'tecnocultivo.es'=>'.current-price-value',
-                'www.amazon.es'=>'.aok-offscreen',
-                'elcultivar.com'=>'.preciocombinacion',
-                'servovendi.com'=>'meta[itemprop="price"]',             
-                'eurogrow.es' => '.our_price_display',
-                'sologrow.es' => '.current-price-value',
-                'www.lahuertagrowshop.com' => '.att-precio-final',
+                'www.amazon.es'=>'.aok-offscreen',                
                 // Add more domain-class pairs as needed
             ];
 
