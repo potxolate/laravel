@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 	@section('content')
+	@if (session()->has('message'))
+
+	<p class="alert alert-success">{{ session('message') }}</p>
+
+
+	@endif
 		<h1 class="text-center my-2">All the links</h1>
 		<div class="row">
 			<div class="d-flex justify-content-center">
@@ -55,7 +61,6 @@
 		</table>
 		@isset($links)
 			<div class="d-flex my-2 justify-content-center">{{ $links->links() }}</div>
-		@endisset
-		<example-component></example-component><!--Añadimos nuestro componente vuejs-->
+		@endisset		
 	@endsection
 

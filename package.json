@@ -16,6 +16,9 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
-        "sass-loader": "^14.0.0"
+        "jquery": "^3.7.1",
+        "sass-loader": "^14.0.0",
+        "typeahead.js": "^0.11.1",
+        "vue-typeahead-bootstrap": "^2.12.0"
     }
 }

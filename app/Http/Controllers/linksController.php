@@ -46,6 +46,7 @@ class linksController extends Controller
         $link->product_id   = $request->input('product_id');
         $link->url          = $request->input('url');
         $link->save();
+        $link->update(['price' => $link->getPriceFromUrl()]);
         
         return redirect()->route('productos');
 		#$validator = Validator::make(Input::all(), $rules);
