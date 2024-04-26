@@ -26,7 +26,7 @@ export default {
     methods: {
         search() {
             // Reemplazar con la URL real de la API
-            const url = `http://192.168.1.128:8000/autocomplete?q=${this.searchTerm}`;
+            const url = window.location.origin+'/autocomplete?q=${this.searchTerm}';
 
             fetch(url)
                 .then(response => response.json())

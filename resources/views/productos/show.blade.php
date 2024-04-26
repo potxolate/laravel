@@ -34,6 +34,7 @@
                 @endforeach
             </div>
             <counter />
+            <counter resource="{{  route('product', $previous->slug ?? '') }}"></counter>
         </div>
     </div>
     <div class="row text-center">

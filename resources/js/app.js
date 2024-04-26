@@ -15,6 +15,9 @@ import Counter from './components/Counter.vue'
  * to use in your application's views. An example is included for you.
  */
 
+const currentUrl = window.location.origin;
+    console.log(currentUrl);
+
 const app = createApp({});
 
 
