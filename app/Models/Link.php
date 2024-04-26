@@ -43,66 +43,31 @@ class Link extends Model
 
     protected function extractPriceFromUrl(): string
     {
-        $domainToPriceSelector = $this->loadDomainToPriceSelectorConfig();
+        $domainToPriceSelector = $this->loadPriceSelectors();
         $parsedUrl = parse_url($this->url);
         $domain = $parsedUrl['host'];
-        Log::info('Entramos al dominio -'.$domain);
-        if (isset($domainToPriceSelector[$domain])) {
-            $priceSelector = $domainToPriceSelector[$domain];
-        } else {
-            // Selector por defecto si el dominio no está en la configuración
-            $priceSelector = 'span[itemprop="price"]';
-        }
         
-        Log::info($domain.'This is some useful information.'.$priceSelector);
+        $priceSelector = $domainToPriceSelector[$domain] ?? 'span[itemprop="price"]';
+        
+        Log::info($domain.' -- This is some useful information. -- '.$priceSelector);
         $html = $this->fetchHtmlFromUrl();
-        $crawler = new Crawler($html);
-        $priceElement = $crawler->filter($priceSelector)->first();
+        $crawler = new Crawler($html);        
 
         if ($priceSelector == 'span[itemprop="price"]'){
-            return $priceElement->attr('content');
+            $priceElement = $crawler->filterXPath('//span[@itemprop="price"]');
+            return $priceElement->attr('content');            
+
         }else{
+            $priceElement = $crawler->filter($priceSelector)->first();
             return $priceElement->text();
-        }
-            
+        }           
 
-    }
-
-    protected function loadDomainToPriceSelectorConfig(): array
-    {
-        // Aquí puedes cargar la configuración desde un archivo JSON o cualquier otra fuente de datos
-        // Por ejemplo:
-        // $config = json_decode(file_get_contents('domain_to_price_selector.json'), true);
-        // return $config;
-
-        // Por ahora, un array estático:
-        return [
-            'tecnocultivo.es' => '.current-price-value',
-            'www.amazon.es' => '.aok-offscreen',
-            'elcultivar.com' => '.preciocombinacion',
-            'servovendi.com' => 'meta[itemprop="price"]',
-            'eurogrow.es' => '.our_price_display',
-            'sologrow.es' => '.current-price-value',
-            'www.lahuertagrowshop.com' => '.att-precio-final',
-            // Agrega más asociaciones según sea necesario
-        ];
-    }
+    }    
 
     protected function loadPriceSelectors(): array
-    {
-        
-        return [
-            'tecnocultivo.es' => '.current-price-value',
-            'www.amazon.es' => '.aok-offscreen',
-            'elcultivar.com' => '.preciocombinacion',
-            'servovendi.com' => 'meta[itemprop="price"]',
-            'eurogrow.es' => '.our_price_display',
-            'sologrow.es' => '.current-price-value',
-            'www.lahuertagrowshop.com' => '.att-precio-final',
-            // Agrega más asociaciones según sea necesario
-        ];
-        //$config = json_decode(file_get_contents('price_selectors.json'), true);
-        //return $config ?: [];
+    {        
+        $config = json_decode(file_get_contents('price_selectors.json'), true);
+        return $config;
     }
 
     protected function fetchHtmlFromUrl(): string

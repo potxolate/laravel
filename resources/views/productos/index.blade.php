@@ -17,9 +17,9 @@
         <div class="col px-md-3">
             <div class="thumbnail">
                 <div class="caption text-center">
-                    <a href="{{ route('product', $product->slug) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail mb-3"></a>
+                    <a href="{{ route('product', $product->slug ?? '' ) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail mb-3"></a>
                     <h4 class="title m-1">
-                        <a href="{{ route('product', $product->slug) }}" class="text-inherit text-decoration-none">{{ $product->name }}</a>
+                        <a href="{{ route('product', $product->slug ?? '') }}" class="text-inherit text-decoration-none">{{ $product->name }}</a>
                     </h4>
                     <p>{{ $product->price }}</p>                    
                 </div> <!-- end caption -->

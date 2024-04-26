@@ -21,7 +21,7 @@
             </h2>
 
             <p class="text-body-secondary">{{ $product->description }}</p>
-
+            
             <div class="col-md-12 m-3 p-3">
                 @if (count($product->links)>1)
                     <h4>Compara precios :</h4> 
@@ -33,6 +33,7 @@
                     </p>                
                 @endforeach
             </div>
+            <counter />
         </div>
     </div>
     <div class="row text-center">
@@ -45,7 +46,7 @@
     </div>
     <div class="row">
     @if(!empty($category->products))
-    <h4>Otros productos</h4>
+    <h4 class="m-2">Otros productos la misma categoría</h4>
         @foreach ($category->products as $more_product)
             <div class="col-2 px-md-3">
                 <div class="thumbnail">

@@ -1,0 +1,10 @@
+{
+    "tecnocultivo.es": ".current-price-value",
+    "www.amazon.es": ".aok-offscreen",
+    "elcultivar.com": ".price",
+    "servovendi.com": "meta[itemprop='price']",
+    "eurogrow.es": ".our_price_display",
+    "sologrow.es": ".current-price-value",
+    "www.lahuertagrowshop.com": ".att-precio-final",
+    "www.growshoponline.net": "price_with_tax price_pvp"
+}

@@ -88,7 +88,7 @@ class ProductosController extends Controller
     {
         $search = $request->input('search');
         $productos = Product::where('name', 'like', "%$search%")->get();
-
+        //dd( $productos);
         return view('productos.index', ['productos' => $productos]);
     }
 
