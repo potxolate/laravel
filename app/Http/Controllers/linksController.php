@@ -8,6 +8,7 @@ use App\Models\Link;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class linksController extends Controller
 {
@@ -34,40 +35,24 @@ class linksController extends Controller
      */
     public function store(StoreLinkRequest $request)
     {
-        //dd($request->all);
-        // validate
-		// read more on validation at http://laravel.com/docs/validation
-		$rules = array(
-			'product_id'       => 'required',
-			'url'      => 'required|url'			
-		);
+        $validated = $request->validate([
+            'product_id' => 'required',
+            'url' => 'required|url',
+        ]);
+		
+		if (!$validated) {
+			return redirect('links/create')
+				->withErrors($validated);
+		} else {
+			// store
+			$link = new Link;
+            $link->product_id   = $request->input('product_id');
+            $link->url          = $request->input('url');
+            $link->save();
+            $link->update(['price' => $link->getPriceFromUrl()]);
 
-        $link = new Link;
-        $link->product_id   = $request->input('product_id');
-        $link->url          = $request->input('url');
-        $link->save();
-        $link->update(['price' => $link->getPriceFromUrl()]);
-        
-        return redirect()->route('productos');
-		#$validator = Validator::make(Input::all(), $rules);
-
-		// process the login
-		// if ($validator->fails()) {
-		// 	return Redirect::to('nerds/create')
-		// 		->withErrors($validator)
-		// 		->withInput(Input::except('password'));
-		// } else {
-		// 	// store
-		// 	$nerd = new Nerd;
-		// 	$nerd->name       = Input::get('name');
-		// 	$nerd->email      = Input::get('email');
-		// 	$nerd->nerd_level = Input::get('nerd_level');
-		// 	$nerd->save();
-
-		// 	// redirect
-		// 	Session::flash('message', 'Successfully created nerd!');
-		// 	return Redirect::to('nerds');
-		// }
+			return redirect('/links');
+		}
     }
 
     /**

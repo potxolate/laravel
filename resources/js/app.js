@@ -7,7 +7,9 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import ExampleComponent from './components/ExampleComponent.vue';
-import Counter from './components/Counter.vue'
+import Counter from './components/Counter.vue';
+import DatePicker from './components/DatePicker.vue'
+
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -15,15 +17,13 @@ import Counter from './components/Counter.vue'
  * to use in your application's views. An example is included for you.
  */
 
-const currentUrl = window.location.origin;
-    console.log(currentUrl);
-
 const app = createApp({});
 
 
 app
     .component('example-component', ExampleComponent)
-    .component('counter', Counter);
+    .component('counter', Counter)
+    .component('date-picker', DatePicker);
 
 /**
  * The following block of code may be used to automatically register your

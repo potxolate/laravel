@@ -55,13 +55,14 @@ class Link extends Model
 
         if ($priceSelector == 'span[itemprop="price"]'){
             $priceElement = $crawler->filterXPath('//span[@itemprop="price"]');
-            return $priceElement->attr('content');            
-
-        }else{
+            return $priceElement->attr('content');
+        } elseif ($priceSelector =='meta') {
+            $priceElement = $crawler->filterXPath('//meta[@itemprop="price"]');
+            return $priceElement->attr('content');
+        } else{
             $priceElement = $crawler->filter($priceSelector)->first();
             return $priceElement->text();
-        }           
-
+        } 
     }    
 
     protected function loadPriceSelectors(): array

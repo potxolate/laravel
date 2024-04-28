@@ -14,6 +14,9 @@ class ProductSeeder extends Seeder
 
         foreach ($products as $product) {
             $product->slug = Str::slug($product->name);
+            if (Product::where('slug', Str::slug($product->name))->exists()) {                
+                $product->slug .= (string)$product->id;
+            }            
             $product->save();
         }
     }
