@@ -35,6 +35,8 @@ Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('pr
 Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
 Route::get('/products/search', [ProductosController::class, 'search'])->name('products.search');
 Route::delete('/products/{product}/links/{link}', [ProductosController::class, 'removeLink']) ->name('products.removeLink');
+Route::post('/api/product/favorite/{id}', [ProductosController::class, 'toggleFavorite']);
+
 
 Auth::routes();
 

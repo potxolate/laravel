@@ -15,6 +15,15 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    @if (count($user->favorites)>0)
+                        <h4 class="m-2">Tus productos :</h4> 
+                    @endif
+                    @foreach ($user->favorites as $fav)
+                        <p class="h5 m-2">                            
+                            <a href="{{ route('product', $fav->product->slug) }}" class="small">{{ $fav->product->name }}</a> 
+                        </p>                
+                    @endforeach
                 </div>
             </div>
         </div>

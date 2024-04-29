@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Link;
+use App\Models\Favorite;
+use App\Models\User;
 
 class ProductosController extends Controller
 {
@@ -97,5 +99,33 @@ class ProductosController extends Controller
         $product->links()->delete($link->id);
 
         return back()->with('success', 'Enlace eliminado correctamente.');
+    }
+
+    public function toggleFavorite($id)
+    {
+        // Recuperar el usuario autenticado
+        $user = auth()->user();
+        
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no autenticado'], 401);
+        }
+        
+        $product = Product::find($id);
+        
+        if (!$product) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
+        
+        $favorite = Favorite::where('user_id', $user->id)->where('product_id', $id)->first();
+
+        if ($favorite) {
+            // Si el producto ya está marcado como favorito, lo eliminamos
+            $favorite->delete();
+            return response()->json(['message' => $product->name.' eliminado de favoritos'.$user->name], 200);
+        } else {
+            // Si el producto no está marcado como favorito, lo agregamos
+            $user->favorites()->create(['product_id' => $id]);
+            return response()->json(['message' => $product->name.' añadido a favoritos de '.$user->name], 200);
+        }        
     }
 }

@@ -4,6 +4,8 @@
     "elcultivar.com": ".price",    
     "eurogrow.es": ".our_price_display",
     "sologrow.es": ".current-price-value",
+    "cogollo.es": ".current-price-value",
+    "www.growimagine.com": ".current-price-value",
     "www.lahuertagrowshop.com": ".att-precio-final",
     "www.ebregrow.com": "bdi",
     "saltonverde.com": "bdi",    
@@ -11,6 +13,6 @@
     "www.armariosdecultivo.com": ".price_with_tax price_pvp",
     "www.growlobby.com": ".price",
     "www.powercogollo.com": ".price",
-    "servovendi.com": "meta",
-    "www.growimagine.com": ".current-price-value"
+    "servovendi.com": "meta"
+    
 }

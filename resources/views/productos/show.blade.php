@@ -11,6 +11,7 @@
         </div>
         <div class="col-md-4 p-2">
             <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="img-responsive img-fluid" />
+            <favorite-button :product-id="{{$product->id}}" />
         </div>
         <div class="col-md-8 p-2">
             <h2 class="h2">

@@ -23,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // Recuperar el usuario autenticado
+        $user = auth()->user();
+        //$fav_products = $user->favorites();
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no autenticado'], 401);
+        }
+
+        return view('home', compact('user'));
     }
 }

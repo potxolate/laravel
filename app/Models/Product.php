@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Link;
 use App\Models\Category;
+use App\Models\Favorite;
 
 class Product extends Model
 {
@@ -30,6 +31,11 @@ class Product extends Model
     public function links(): HasMany
     {
         return $this->hasMany(Link::class);
+    }
+
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
     }
 
     public function category()
