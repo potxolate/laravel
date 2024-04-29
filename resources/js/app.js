@@ -8,7 +8,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import ExampleComponent from './components/ExampleComponent.vue';
 import Counter from './components/Counter.vue';
-import DatePicker from './components/DatePicker.vue';
+import ProductSlider from './components/ProductSlider.vue';
 import FavButton from './components/FavButton.vue';
 
 
@@ -24,7 +24,7 @@ const app = createApp({});
 app
     .component('example-component', ExampleComponent)
     .component('counter', Counter)
-    .component('date-picker', DatePicker)
+    .component('product-slider', ProductSlider)
     .component('favorite-button', FavButton);
 
 /**

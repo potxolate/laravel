@@ -46,10 +46,12 @@
         </h5>
     </div>
     <div class="row">
-    @if(!empty($category->products))
-        <h4 class="m-2">Otros productos la misma categoría</h4>
-        <date-picker product-slug="{{$product->name}}" :products="{{$category->products}}"></date-picker>        
-    @endif
+        <div class="col">
+        @if(!empty($category->products))
+            <h4 class="m-2">Otros productos la misma categoría</h4>
+            <product-slider product-slug="{{$product->name}}" :products="{{$category->products}}"></product-slider>        
+        @endif
+        </div>    
     </div>
 
 @endsection
