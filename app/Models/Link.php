@@ -43,6 +43,9 @@ class Link extends Model
 
     protected function extractPriceFromUrl(): string
     {
+        
+        Log::warning(' --- Estamos por aquí --- ' . $this->url);
+        
         $domainToPriceSelector = $this->loadPriceSelectors();
         $parsedUrl = parse_url($this->url);
         $domain = $parsedUrl['host'];
@@ -67,7 +70,9 @@ class Link extends Model
 
     protected function loadPriceSelectors(): array
     {        
-        $config = json_decode(file_get_contents('price_selectors.json'), true);
+        Log::warning(' --- Llegamos  aquí --- ');
+        $config = json_decode(file_get_contents(base_path('/public/price_selectors.json')), true);
+        
         return $config;
     }
 

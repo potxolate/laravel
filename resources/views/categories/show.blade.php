@@ -12,22 +12,23 @@
             </form>
         </div>
     </div>
+    @foreach ($category->products->chunk(4) as $chunk)
     <div class="row">
-        @foreach ($category->products as $product)
-        <div class="col px-md-3">
+        @foreach ($chunk as $product)
+        <div class="col-md-3 p-3 ">
             <div class="thumbnail">
                 <div class="caption text-center">
-                    <a href="{{ url('product', [$product->id]) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail"></a>
+                    <a href="{{ route('product', $product->slug ?? '' ) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail"></a>
                     <h4 class="title m-1">
-                        <a href="{{ url('product', [$product->id]) }}" class="text-inherit text-decoration-none">
+                        <a href="{{ route('product', $product->slug ?? '' ) }}" class="text-inherit text-decoration-none">
                             {{ $product->name }}
-                        </a>
-                        <p>{{ $product->price }}</p>
+                        </a>                        
                     </h4>
                 </div> <!-- end caption -->
             </div> <!-- end thumbnail -->
         </div> <!-- end col-md-3 -->
         @endforeach
     </div>
+    @endforeach
     
 @endsection

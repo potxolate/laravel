@@ -12,17 +12,19 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                    @endif                   
 
                     @if (count($user->favorites)>0)
-                        <h4 class="m-2">Tus productos :</h4> 
+                        <h4 class="m-2">{{ __('Your products') }}</h4> 
                     @endif
                     @foreach ($user->favorites as $fav)
-                        <p class="h5 m-2">                            
-                            <a href="{{ route('product', $fav->product->slug) }}" class="small">{{ $fav->product->name }}</a> 
-                        </p>                
+                        <div class="d-flex mt-2 p-2">                           
+                            <img src="{{ $fav->product->image_url }}" alt="{{ $fav->product->name }}" class="img-fluid img-thumbnail" style="width: 80px; height: 80px"/>
+                            <div>
+                                <a href="{{ route('product', $fav->product->slug) }}" class="fs-4 p-3 text-success link-underline link-underline-opacity-0">{{ $fav->product->name }}</a>                                                            
+                                <div class="px-3">{{ count($fav->product->links) }} enlaces</div>
+                            </div>
+                        </div>                
                     @endforeach
                 </div>
             </div>

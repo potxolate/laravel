@@ -29,8 +29,9 @@ class GetProductPrices extends Command
         $links = Link::all(); // Obtiene todos los registros de la tabla 'links'
 
         foreach ($links as $link) {
-            $price = $link->getPriceFromUrl(); // Recupera el precio del producto usando getPriceFromUrl()
-            $link->update(['price' => $price]); // Actualiza el precio en la base de datos
+            
+            $link->update(['price' => $link->getPriceFromUrl()]);
+            
         }
     }
 }

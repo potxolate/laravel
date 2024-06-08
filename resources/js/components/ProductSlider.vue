@@ -1,5 +1,5 @@
 <template>
-  <Carousel :items-to-show="products.length" :wrap-around="true">
+  <Carousel :items-to-show="4" :wrap-around="true">
     <Slide v-for="product in products" :key="product.id">      
       <div class="carousel__item px-md-2">
             <div class="caption text-center">

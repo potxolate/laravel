@@ -14,7 +14,7 @@
     @foreach ($productos->chunk(4) as $items)
     <div class="row">
         @foreach ($items as $product)
-        <div class="col px-md-3">
+        <div class="col-md-3 py-md-3">
             <div class="thumbnail">
                 <div class="caption text-center">
                     <a href="{{ route('product', $product->slug ?? '' ) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail mb-3"></a>

@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center m-2">
+    <div class="text-center">
       <button @click="toggleFavorite" class="btn btn-success p-1">
         {{ isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos' }}
       </button>
