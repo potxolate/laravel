@@ -12,21 +12,29 @@
         </div>
     </div>
     @foreach ($productos->chunk(4) as $items)
-    <div class="row">
-        @foreach ($items as $product)
-        <div class="col-md-3 py-md-3">
-            <div class="thumbnail">
-                <div class="caption text-center">
-                    <a href="{{ route('product', $product->slug ?? '' ) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail mb-3"></a>
-                    <h4 class="title m-1">
-                        <a href="{{ route('product', $product->slug ?? '') }}" class="text-inherit text-decoration-none">{{ $product->name }}</a>
-                    </h4>
-                    <p>{{ $product->price }}</p>                    
-                </div> <!-- end caption -->
-            </div> <!-- end thumbnail -->
-        </div> <!-- end col-md-3 -->
-        @endforeach
-    </div> <!-- end row -->
+        <div class="row g-2"> <!-- Espaciado entre columnas -->
+            @foreach ($items as $product)
+                <div class="col-md-3">
+                    <div class="card h-100 text-center shadow-sm border-0">
+                        <a href="{{ route('product', $product->slug ?? '') }}">
+                            <img src="{{ $product->image_url }}" 
+                                alt="{{ $product->name }}" 
+                                class="card-img-top img-thumbnail mx-auto"
+                                style="max-width: 200px; height: auto;">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ route('product', $product->slug ?? '') }}" class="text-decoration-none text-dark">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <p class="card-text fw-bold">{{ $product->price }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     @endforeach
+
 </div>
 @endsection

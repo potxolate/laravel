@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Yajra\DataTables\DataTables;
+
 
 class CategoryController extends Controller
 {
@@ -15,6 +17,24 @@ class CategoryController extends Controller
         //$categories = Category::with('subcategories')->get();
         $categories = Category::all();        
         return view('categories.index', compact('categories'));
+    }
+
+    public function data(Request $request)
+    {
+        $data = Category::latest()->get();
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a href="'.route('categories.edit', $row->id).'" class="edit btn btn-primary btn-sm">Edit</a>';
+                $btn .= ' <form action="'.route('categories.destroy', $row->id).'" method="POST" style="display:inline;">
+                              '.csrf_field().'
+                              '.method_field("DELETE").'
+                              <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                          </form>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     /**

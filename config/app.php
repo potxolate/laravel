@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://192.168.1.134'),
+    'url' => env('APP_URL', 'http://192.168.1.89'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -168,7 +168,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,        
+        Collective\Html\HtmlServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,       
     ])->toArray(),
 
     /*

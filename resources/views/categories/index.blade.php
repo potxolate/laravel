@@ -2,6 +2,38 @@
 
 @section('content')
 <div class="container">
+    <h1>Categories</h1>
+    <table id="categories-table" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>               
+                <th>Actions</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#categories-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('categories.data') }}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' },           
+            { data: 'action', name: 'action', orderable: false, searchable: false }
+        ]
+    });
+});
+</script>
+@endpush
+
+@section('content')
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-auto">
             <h1 class="text-center my-2">Categorías</h1>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HospedajesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\linksController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -27,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/hospedajes', [HospedajesController::class, 'index'])->name('hospedajes');
 
 //Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/data', [CategoryController::class, 'data'])->name('categories.data');
 Route::resource('categories', CategoryController::class);
 
 Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
@@ -44,3 +46,8 @@ Route::resource('links', linksController::class);
 Route::get('/search', [linksController::class, 'search'])->name('links.search');
 
 Route::get('/autocomplete',  [App\Http\Controllers\linksController::class, 'autocomplete'])->name('autocomplete');
+
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+    // Otras rutas de administración
+});

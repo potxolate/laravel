@@ -14,87 +14,104 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Scripts de Laravel -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+    @stack('scripts')
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
     <div id="app">        
+        <!-- Navbar -->
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-success fw-semibold fs-3" href="{{ url('/') }}">                        
-                        <x-heroicon-m-bars-arrow-up style="width: 20px;height: 20px;" />
-                        {{ config('app.name') }}
-                        <!-- <img src="{{ url('/assets/img/logo.png') }}" alt=" {{ config('app.name') }} "/> -->                        
+                <div class="container">
+                    <!-- Logo -->
+                    <a class="navbar-brand text-success fw-semibold fs-4 d-flex align-items-center" href="{{ url('/') }}">
+                        <x-heroicon-m-bars-arrow-up style="width: 20px; height: 20px;" />
+                        <span class="ms-2">{{ config('app.name') }}</span>
                     </a>
+                    
+                    <!-- Navbar Toggler -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
+                    <!-- Navbar Content -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mx-auto ">
+                        <ul class="navbar-nav mx-auto gap-3">
                             <li class="nav-item">
-                                <a class="nav-link navbar-brand" href="{{ url('/categories') }}">{{ __('Categorias') }}</a>
+                                <a class="nav-link" href="{{ url('/categories') }}">{{ __('Categorias') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link navbar-brand" href="{{ url('/productos') }}">{{ __('Productos') }}</a>
+                                <a class="nav-link" href="{{ url('/productos') }}">{{ __('Productos') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link navbar-brand" href="{{ url('/links') }}">{{ __('Enlaces') }}</a>
+                                <a class="nav-link" href="{{ url('/links') }}">{{ __('Enlaces') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link navbar-brand" href="/links">{{ __('Contacto') }}</a>
+                                <a class="nav-link" href="{{ url('/contacto') }}">{{ __('Contacto') }}</a>
                             </li>
                         </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav mx-5">
-                            <!-- Authentication Links -->
+                        <ul class="navbar-nav ms-auto">
                             @guest
-                            @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                            @endif
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link btn btn-outline-success px-3 me-2" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link btn btn-success px-3" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
                             @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('home') }}">{{ __('Home') }}</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>                                
-                                </div>
-                            </li>                        
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('home') }}">{{ __('Home') }}</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" 
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>                                
+                                    </div>
+                                </li>
                             @endguest
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
-        <main class="container mt-5">
+
+        <!-- Main Content -->
+        <main class="container my-5">
             @yield('content')
         </main>
-        <footer class="footer mt-5">
-            <div class="ml-4 text-center text-sm sm:text-right sm:ml-0 bg-dark text-white flex-fill">
+
+        <!-- Footer -->
+        <footer class="footer bg-dark text-white text-center py-3 mt-auto">
+            <div>
                 Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
             </div>
-        </footer>        
+        </footer>
     </div>
+
 </body>
 
 </html>

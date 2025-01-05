@@ -6,6 +6,7 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import axios from 'axios';
 import ExampleComponent from './components/ExampleComponent.vue';
 import Counter from './components/Counter.vue';
 import ProductSlider from './components/ProductSlider.vue';
