@@ -71,7 +71,7 @@
                 
                 <!-- Contador -->
                 <div class="mt-4">
-                    <counter :urls="{{ $product->links }}"></counter>
+                    <!-- <counter :urls="{{ $product->links }}"></counter> -->
                 </div>
             </div>
         </div>
