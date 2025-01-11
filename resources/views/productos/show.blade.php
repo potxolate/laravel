@@ -46,7 +46,7 @@
                 <p class="text-body-secondary fs-5 p-2">{{ $product->description }}</p>
                 
                 <!-- Comparar precios -->
-                @if (count($product->links) > 1)
+                @if (count($product->links) > 0)
                     <h5 class="fw-semibold mt-4">Compara precios:</h5>
                     <div class="row row-cols-1 row-cols-md-2 g-3">
                         @foreach ($product->links as $link)
