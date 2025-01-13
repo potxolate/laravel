@@ -77,7 +77,7 @@ class ProductosController extends Controller
         $product->update($request->all());
 
         if ($request->has('link') && $request->input('link') != "") {
-            $link = $product->links()->create(['url' => $request->input('link'), 'id' => $id]);
+            $link = $product->links()->create(['url' => $request->input('link')]);
             // Recupera el precio del producto usando getPriceFromUrl()
             $link->update(['price' => $link->getPriceFromUrl()]);
         }
