@@ -14,13 +14,13 @@
 
 ## Introduction
 
-Welcome to the Laravel Project! This repository contains a Laravel application designed to [describe the purpose of your project]. 
+Welcome to the Laravel Project! This repository contains a Laravel application designed to compare product prices. 
 
 ## Features
 
-- **Feature 1:** Description of feature 1.
-- **Feature 2:** Description of feature 2.
-- **Feature 3:** Description of feature 3.
+- **Feature 1:** Add the url of the same product on different stores.
+- **Feature 2:** Compare prices.
+- **Feature 3:** Enjoy.
 
 ## Installation
 
