@@ -3,28 +3,46 @@
 
 	@section('content')
 
-	<h1 class="text-center m-2">Create a Link</h1>
-	<div class="w-50 text-center mx-auto">
-	<!-- if there are creation errors, they will show here -->
-	{{ HTML::ul($errors->all() )}}
+	<div class="container my-4">
+    <!-- Cabecera -->
+    <h1 class="text-center mb-4">Crear un Enlace</h1>
 
-	{{ Form::open(array('url' => 'links')) }}
+    <!-- Mensajes de error -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-		<div class="form-group p-4">
-			{{ Form::label('product', 'Product') }}
-			<example-component></example-component>			
-		</div>
+    <!-- Formulario de creación -->
+    <div class="card w-50 mx-auto shadow-sm p-4">
+        {{ Form::open(['url' => 'links', 'method' => 'POST']) }}
 
-		<div class="form-group p-4">
-			{{ Form::label('url', 'URL') }}
-			{{ Form::url('url', 'url',  array('class' => 'form-control')) }}
-		</div>	
+        <!-- Campo Producto -->
+        <div class="form-group mb-3">
+            {{ Form::label('product', 'Producto', ['class' => 'form-label fw-bold']) }}
+            <example-component></example-component>
+        </div>
 
-		{{ Form::submit('Create the Link!', array('class' => 'btn btn-primary')) }}
+        <!-- Campo URL -->
+        <div class="form-group mb-3">
+            {{ Form::label('url', 'URL', ['class' => 'form-label fw-bold']) }}
+            {{ Form::url('url', old('url'), ['class' => 'form-control', 'placeholder' => 'Introduce la URL...']) }}
+        </div>
 
-	{{ Form::close() }}
+        <!-- Botón Crear -->
+        <div class="text-center">
+            {{ Form::submit('Crear Enlace', ['class' => 'btn btn-primary px-5']) }}
+        </div>
 
-	</div>
+        {{ Form::close() }}
+    </div>
+</div>
+
 	
 	
 @endsection
