@@ -48,6 +48,10 @@ Route::get('/search', [linksController::class, 'search'])->name('links.search');
 Route::get('/autocomplete',  [App\Http\Controllers\linksController::class, 'autocomplete'])->name('autocomplete');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
-    // Otras rutas de administración
+    Route::resource('admin/users', AdminController::class)->names([
+        'index' => 'admin.users.index',
+        'edit' => 'admin.users.edit',
+        'destroy' => 'admin.users.destroy',
+    ]);
+    Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
 });
