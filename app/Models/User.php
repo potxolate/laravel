@@ -54,4 +54,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    // Verifica si el usuario tiene un rol específico
+    public function hasRole($role)
+    {
+        return $this->role()->where('name', $role)->exists();
+    }
 }
