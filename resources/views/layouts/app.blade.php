@@ -59,7 +59,7 @@
                                 <a class="nav-link" href="{{ url('/links') }}">{{ __('Enlaces') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/contacto') }}">{{ __('Contacto') }}</a>
+                                <a class="nav-link" href="{{ url('/contact') }}">{{ __('Contacto') }}</a>
                             </li>
                         </ul>
 

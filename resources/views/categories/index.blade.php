@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Categories</h1>
-    <table id="categories-table" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>               
-                <th>Actions</th>
-            </tr>
-        </thead>
-    </table>
+<div class="container my-4">
+    <h1 class="text-center my-3">Categories</h1>    
+        <table id="categories-table" class="table table-striped table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>               
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
 </div>
 @endsection
 
