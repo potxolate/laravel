@@ -20,8 +20,5 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Run database migrations
-      run: php artisan migrate
-
     - name: Clean cache
       run: php artisan cache:clear
