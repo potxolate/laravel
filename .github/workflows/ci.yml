@@ -22,3 +22,12 @@ jobs:
 
     - name: Clean cache
       run: php artisan cache:clear
+    
+    - name: Deploy to Production
+      uses: SamKirkland/FTP-Deploy-Action@4.5.0
+      with:
+        server: ${{ secrets.FTP_URLSERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./ # Cambia esto si necesitas subir solo una carpeta específica.
+        server-dir: /public_html # Cambia esto si necesitas subir a una carpeta específica.
