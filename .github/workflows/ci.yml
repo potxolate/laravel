@@ -28,3 +28,10 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./ # Cambia esto si necesitas subir solo una carpeta específica.
         server-dir: / # Cambia esto si necesitas subir a una carpeta específica.
+        dry-run: false # Asegúrate de que no esté en modo de prueba.
+        dangerous-clean-slate: false # Solo sube los archivos modificados.
+        exclude: |
+          .git*
+          node_modules/
+          vendor/
+          .env
