@@ -15,10 +15,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      uses: actions/checkout@v2    
 
     - name: Clean cache
       run: php artisan cache:clear
