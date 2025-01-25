@@ -34,11 +34,13 @@ Route::resource('categories', CategoryController::class);
 
 Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
 Route::get('/product/{product}', [ProductosController::class, 'show'])->name('product');
-Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('product.edit');
-Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
 Route::get('/products/search', [ProductosController::class, 'search'])->name('products.search');
-Route::delete('/products/{product}/links/{link}', [ProductosController::class, 'removeLink']) ->name('products.removeLink');
 Route::post('/api/product/favorite/{id}', [ProductosController::class, 'toggleFavorite']);
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
+    Route::delete('/products/{product}/links/{link}', [ProductosController::class, 'removeLink']) ->name('products.removeLink');
+});
 
 
 Auth::routes();

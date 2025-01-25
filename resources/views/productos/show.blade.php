@@ -37,10 +37,12 @@
                 <h2 class="h2 d-flex align-items-center">
                     {{ $product->name }}
                     @auth
-                        <a href="{{ url('/product/edit', [$product->id]) }}" 
-                           class="btn btn-sm btn-outline-primary ms-3">
-                            Editar
-                        </a>
+                        @if (Auth::user()->hasRole('admin'))
+                            <a href="{{ url('/product/edit', [$product->id]) }}" 
+                            class="btn btn-sm btn-outline-primary ms-3">
+                                Editar
+                            </a>
+                        @endif                        
                     @endauth
                 </h2>
                 <p class="text-body-secondary fs-5 p-2">{{ $product->description }}</p>
