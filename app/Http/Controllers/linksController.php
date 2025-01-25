@@ -6,6 +6,7 @@ use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -112,5 +113,33 @@ class linksController extends Controller
                     ->get();
         
         return response()->json($data);
+    }
+
+    public function updatePrice(Link $link)
+    {
+        $link->update(['price' => $link->getPriceFromUrl()]);
+
+        $product = Product::find($link->product_id);
+        $links = $product->links;
+        $categories = Category::pluck('name', 'id')->toArray();
+
+        // get previous product
+        $previous = Product::where('id', '<', $product->id)->select('id','slug')->orderby('id','desc')->first();        
+        // get next product
+        $next = Product::where('id', '>', $product->id)->select('id','slug')->orderby('id','asc')->first(); 
+
+        return view(
+            'productos.update',
+            [
+                'product' => $product,
+                'previous' => $previous,
+                'next' => $next,
+                'links' => $links,
+                'categories' => $categories,
+            ]
+        );
+
+        return redirect()->route('links.index')
+            ->with('success', 'Updated successfully.');
     }
 }

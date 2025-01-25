@@ -45,7 +45,7 @@ Auth::routes();
 
 Route::resource('links', linksController::class);
 Route::get('/search', [linksController::class, 'search'])->name('links.search');
-
+Route::post('/links/{link}/update-price', [linksController::class, 'updatePrice'])->name('links.updatePrice');
 Route::get('/autocomplete',  [App\Http\Controllers\linksController::class, 'autocomplete'])->name('autocomplete');
 
 Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.show');

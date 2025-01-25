@@ -40,21 +40,29 @@
     <!-- Sección de Enlaces -->
     <div class="row">
         <div class="col-md-12">
-            <h3 class="text-center mb-3">Enlaces Asociados</h3>
+            
+            <h3 class="text-center mb-4">Enlaces Asociados</h3>
             <ul class="list-group mb-4">
                 @foreach ($links as $link)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <a href="{{ $link->url }}" target="_blank">{{ $link->getDominioAttribute() }}</a>
+                        <div class="d-flex align-items-center">
+                            <a href="{{ $link->url }}" target="_blank" class="text-decoration-none text-dark fw-bold">
+                                {{ $link->getDominioAttribute() }}
+                            </a>
                             <span class="badge bg-primary ms-3">{{ $link->price }} €</span>
                         </div>
-                        <a href="{{ route('products.removeLink', ['product' => $product->id, 'link' => $link->id]) }}" class="btn btn-sm btn-danger">
-                            <x-heroicon-m-minus-circle style="width: 18px; height: 18px;" />
-                            Eliminar
-                        </a>
+                        <div class="d-flex">
+                            <update-price-button :link-id="{{ $link->id }}" class="me-2"></update-price-button>
+                            <a href="{{ route('products.removeLink', ['product' => $product->id, 'link' => $link->id]) }}"
+                            class="btn btn-sm btn-danger d-flex align-items-center gap-1">
+                                <x-heroicon-m-minus-circle style="width: 18px; height: 18px;" />
+                                <span>Eliminar</span>
+                            </a>
+                        </div>
                     </li>
                 @endforeach
-            </ul>
+            </ul>       
+            
 
             <!-- Añadir Enlace -->
             <div class="text-center">                

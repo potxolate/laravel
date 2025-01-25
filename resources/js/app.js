@@ -11,6 +11,7 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import Counter from './components/Counter.vue';
 import ProductSlider from './components/ProductSlider.vue';
 import FavButton from './components/FavButton.vue';
+import UpdatePriceButton from './components/UpdatePriceButton.vue';
 
 
 /**
@@ -26,7 +27,8 @@ app
     .component('example-component', ExampleComponent)
     .component('counter', Counter)
     .component('product-slider', ProductSlider)
-    .component('favorite-button', FavButton);
+    .component('favorite-button', FavButton)
+    .component('update-price-button', UpdatePriceButton);
 
 /**
  * The following block of code may be used to automatically register your
