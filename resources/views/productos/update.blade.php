@@ -46,10 +46,10 @@
                 @foreach ($links as $link)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
+                            <span class="badge bg-primary me-3">{{ $link->price }} €</span>
                             <a href="{{ $link->url }}" target="_blank" class="text-decoration-none text-dark fw-bold">
                                 {{ $link->getDominioAttribute() }}
-                            </a>
-                            <span class="badge bg-primary ms-3">{{ $link->price }} €</span>
+                            </a>                            
                         </div>
                         <div class="d-flex">
                             <update-price-button :link-id="{{ $link->id }}" class="me-2"></update-price-button>
