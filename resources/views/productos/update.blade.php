@@ -66,7 +66,7 @@
             <!-- Añadir Enlace -->
             <div class="text-center">                
                     @csrf
-                    <div class="input-group w-50 mx-auto">
+                    <div class="input-group w-80 mx-auto">
                         <input type="text" name="link" id="link" class="form-control" placeholder="Añadir nuevo enlace...">
                         <button type="submit" class="btn btn-success">Agregar Enlace</button>
                     </div>
