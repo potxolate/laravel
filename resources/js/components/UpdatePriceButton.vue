@@ -1,6 +1,6 @@
 <template>
     <div>
-      <button @click="updatePrice" class="bg-blue-500 px-4 py-2 rounded">
+      <button @click="updatePrice" class="btn btn-sm btn-primary">
         Actualizar
       </button>
     </div>

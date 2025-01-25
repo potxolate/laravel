@@ -39,8 +39,7 @@
 
     <!-- Sección de Enlaces -->
     <div class="row">
-        <div class="col-md-12">
-            
+        <div class="col-md-8 mx-auto">            
             <h3 class="text-center mb-4">Enlaces Asociados</h3>
             <ul class="list-group mb-4">
                 @foreach ($links as $link)
