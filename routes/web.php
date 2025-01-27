@@ -77,7 +77,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
 
     return redirect('/home'); // Cambia esta ruta según la lógica de tu aplicación
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->middleware(['signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Illuminate\Http\Request $request) {
     $request->user()->sendEmailVerificationNotification();
