@@ -49,11 +49,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mx-auto gap-3">
-                            @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/productos') }}">{{ __('Productos') }}</a>
                             </li>
-                            @else
+                            @auth
                                 @if (Auth::user()->hasRole('admin'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('/categories') }}">{{ __('Categorias') }}</a>
@@ -65,7 +64,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/contact') }}">{{ __('Contacto') }}</a>
                             </li>
-                            @endguest
+                            @endauth
                         </ul>
 
                         <!-- Right Side Of Navbar -->
