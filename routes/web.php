@@ -31,6 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('home');
 
+Route::middleware(ProtectAgainstSpam::class)->group(function() {
+    Auth::routes(['verify' => true]);
+});    
+
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
@@ -41,25 +45,25 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         'destroy' => 'admin.users.destroy',
     ]);
     Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
+
+    Route::resource('categories', CategoryController::class);
+    Route::resource('links', linksController::class);
 });
 
 
-Route::middleware(ProtectAgainstSpam::class)->group(function() {
-    Auth::routes(['verify' => true]);
-});
 
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/data', [CategoryController::class, 'data'])->name('categories.data');
-    Route::resource('categories', CategoryController::class);
+    
     
     Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
     Route::get('/product/{product}', [ProductosController::class, 'show'])->name('product');
     Route::get('/products/search', [ProductosController::class, 'search'])->name('products.search');
     Route::post('/api/product/favorite/{id}', [ProductosController::class, 'toggleFavorite']);
 
-    Route::resource('links', linksController::class);
+    
     Route::get('/search', [linksController::class, 'search'])->name('links.search');
     Route::post('/links/{link}/update-price', [linksController::class, 'updatePrice'])->name('links.updatePrice');
     Route::get('/autocomplete',  [App\Http\Controllers\linksController::class, 'autocomplete'])->name('autocomplete');

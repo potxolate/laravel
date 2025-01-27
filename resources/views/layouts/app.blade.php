@@ -50,14 +50,16 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mx-auto gap-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/categories') }}">{{ __('Categorias') }}</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/productos') }}">{{ __('Productos') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/links') }}">{{ __('Enlaces') }}</a>
-                            </li>
+                            @if (Auth::user()->hasRole('admin'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/categories') }}">{{ __('Categorias') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/links') }}">{{ __('Enlaces') }}</a>
+                                </li>
+                            @endif                            
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/contact') }}">{{ __('Contacto') }}</a>
                             </li>
