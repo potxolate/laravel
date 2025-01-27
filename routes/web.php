@@ -34,12 +34,18 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
     Route::delete('/products/{product}/links/{link}', [ProductosController::class, 'removeLink']) ->name('products.removeLink');
+    Route::resource('admin/users', AdminController::class)->names([
+        'index' => 'admin.users.index',
+        'edit' => 'admin.users.edit',
+        'destroy' => 'admin.users.destroy',
+    ]);
+    Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
 });
 
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['auth', 'verified', 'role:webuser']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/data', [CategoryController::class, 'data'])->name('categories.data');
     Route::resource('categories', CategoryController::class);
@@ -56,16 +62,6 @@ Route::group(['middleware' => ['auth', 'verified', 'role:webuser']], function ()
 
     Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.show');
     Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
-});
-
-
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    Route::resource('admin/users', AdminController::class)->names([
-        'index' => 'admin.users.index',
-        'edit' => 'admin.users.edit',
-        'destroy' => 'admin.users.destroy',
-    ]);
-    Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
 });
 
 // Rutas de verificación de correo
