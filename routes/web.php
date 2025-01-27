@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HospedajesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\linksController;
 use App\Http\Controllers\AdminController;
@@ -9,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ContactController;
+use Spatie\Honeypot\ProtectAgainstSpam;
+
 
 
 /*
@@ -43,7 +44,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 });
 
 
-Auth::routes(['verify' => true]);
+Route::middleware(ProtectAgainstSpam::class)->group(function() {
+    Auth::routes(['verify' => true]);
+});
+
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
