@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HospedajesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\linksController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,18 +26,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('home');
 
-Route::get('/hospedajes', [HospedajesController::class, 'index'])->name('hospedajes');
-
-//Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-Route::get('/data', [CategoryController::class, 'data'])->name('categories.data');
-Route::resource('categories', CategoryController::class);
-
-Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
-Route::get('/product/{product}', [ProductosController::class, 'show'])->name('product');
-Route::get('/products/search', [ProductosController::class, 'search'])->name('products.search');
-Route::post('/api/product/favorite/{id}', [ProductosController::class, 'toggleFavorite']);
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
@@ -43,15 +37,27 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::resource('links', linksController::class);
-Route::get('/search', [linksController::class, 'search'])->name('links.search');
-Route::post('/links/{link}/update-price', [linksController::class, 'updatePrice'])->name('links.updatePrice');
-Route::get('/autocomplete',  [App\Http\Controllers\linksController::class, 'autocomplete'])->name('autocomplete');
+Route::group(['middleware' => ['auth', 'verified', 'role:webuser']], function () {
 
-Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.show');
-Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
+    Route::get('/data', [CategoryController::class, 'data'])->name('categories.data');
+    Route::resource('categories', CategoryController::class);
+    
+    Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
+    Route::get('/product/{product}', [ProductosController::class, 'show'])->name('product');
+    Route::get('/products/search', [ProductosController::class, 'search'])->name('products.search');
+    Route::post('/api/product/favorite/{id}', [ProductosController::class, 'toggleFavorite']);
+
+    Route::resource('links', linksController::class);
+    Route::get('/search', [linksController::class, 'search'])->name('links.search');
+    Route::post('/links/{link}/update-price', [linksController::class, 'updatePrice'])->name('links.updatePrice');
+    Route::get('/autocomplete',  [App\Http\Controllers\linksController::class, 'autocomplete'])->name('autocomplete');
+
+    Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.show');
+    Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
+});
+
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('admin/users', AdminController::class)->names([
@@ -61,3 +67,20 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     ]);
     Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
 });
+
+// Rutas de verificación de correo
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home'); // Cambia esta ruta según la lógica de tu aplicación
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Illuminate\Http\Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Email de verificación enviado.');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
