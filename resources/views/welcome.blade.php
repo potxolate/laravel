@@ -41,7 +41,7 @@
             <div class="max-w-7xl mx-auto text-center">
                 <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
                     Encuentra los mejores precios para tu
-                    <span class="text-emerald-600">cultivo interior</span>
+                    <span class="text-emerald-600">cultivo </span>
                 </h1>
                 <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
                     Compara precios en tiempo real entre múltiples growshops y ahorra en tus productos de cultivo.
