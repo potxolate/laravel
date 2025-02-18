@@ -121,7 +121,7 @@
         <!-- Footer -->
         <footer class="footer bg-dark text-white text-center py-3 mt-auto">
             <div>
-                Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                <p>© 2025 GrowPriceTracker. Todos los derechos reservados.</p>
             </div>
         </footer>
     </div>
