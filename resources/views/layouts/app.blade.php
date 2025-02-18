@@ -22,6 +22,7 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     @stack('scripts')
 
     <!-- Scripts -->
@@ -35,10 +36,16 @@
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
                     <!-- Logo -->
-                    <a class="navbar-brand text-success fw-semibold fs-4 d-flex align-items-center" href="{{ url('/') }}">
-                        <x-heroicon-m-bars-arrow-up style="width: 20px; height: 20px;" />
-                        <span class="ms-2">{{ config('app.name') }}</span>
-                    </a>
+                    
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <a class="navbar-brand text-success fw-semibold fs-4 d-flex align-items-center" href="{{ url('/') }}">
+                                <i class="fas fa-seedling fs-2 text-success"></i>
+                                <span class="ms-2 fs-4 fw-bold text-dark">GrowPriceTracker</span>
+                            </a>
+                        </div>
+                    </div>
+                   
                     
                     <!-- Navbar Toggler -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
