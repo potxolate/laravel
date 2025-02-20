@@ -9,7 +9,7 @@
             <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="img-fluid rounded shadow-sm">
         </div>
         <div class="col-md-8">
-            {{ Form::open(['url' => 'product/update/' . $product->id, 'method' => 'POST', 'class' => 'card p-4 shadow-sm']) }}            
+            {{ Form::open(['route' => ['product.update', $product->id], 'method' => 'PATCH', 'class' => 'card p-4 shadow-sm']) }}            
 
             <!-- Campo Nombre -->
             <div class="form-group mb-3">
@@ -64,12 +64,12 @@
             
 
             <!-- Añadir Enlace -->
-            <div class="text-center">                
-                {{ Form::open(['url' => 'product/update/' . $product->id, 'method' => 'POST', 'class' => 'card p-4 shadow-sm']) }}            
-                    @csrf
+            <div class="text-center">
+                {{ Form::open(['route' => ['product.update', $product->id], 'method' => 'PATCH', 'class' => 'card p-4 shadow-sm']) }}                    
+                   
                     <div class="input-group w-80 mx-auto">
-                        <input type="text" name="link" id="link" class="form-control" placeholder="Añadir nuevo enlace...">
-                        <button type="submit" class="btn btn-success">Agregar Enlace</button>
+                        {{ Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Añadir nuevo enlace...']) }}
+                        {{ Form::submit('Agregar Enlace', ['class' => 'btn btn-success']) }}
                     </div>
                 {{ Form::close() }}
             </div>

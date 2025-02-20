@@ -37,7 +37,7 @@ Route::middleware(ProtectAgainstSpam::class)->group(function() {
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/product/edit/{id}', [ProductosController::class, 'edit'])->name('product.edit');
-    Route::post('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
+    Route::patch('/product/update/{id}', [ProductosController::class, 'update'])->name('product.update');
     Route::delete('/products/{product}/links/{link}', [ProductosController::class, 'removeLink']) ->name('products.removeLink');
     Route::resource('admin/users', AdminController::class)->names([
         'index' => 'admin.users.index',
