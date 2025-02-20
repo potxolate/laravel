@@ -15,25 +15,34 @@ import axios from 'axios';
       productId: {
         type: Number,
         required: true
+      },
+      initialFavorite: {
+        type: Boolean,
+        required: true
       }
     },
     data() {
       return {
-        isFavorite: false
+        isFavorite: this.initialFavorite, // Carga el estado inicial desde el backend
+        loading: false
       };
     },
     methods: {
       toggleFavorite() {
-        // Aquí puedes hacer una solicitud a tu backend para guardar o quitar el producto de favoritos
-        this.isFavorite = !this.isFavorite;
+        this.loading = true;
+        const baseURL = import.meta.env.VITE_APP_URL || "http://localhost";
         // Por ejemplo, puedes hacer una petición AJAX a una ruta definida en tu backend de Laravel
-        axios.post('/api/product/favorite/' + this.productId )
+        axios.post(`${baseURL}/api/product/favorite/` + this.productId )
           .then(response => {
+            this.isFavorite = !this.isFavorite;
             alert(response.data.message);
           })
           .catch(error => {
             console.error(error);
-          });
+          })
+          .finally(() => {
+          this.loading = false;
+        });
       }
     }
   };

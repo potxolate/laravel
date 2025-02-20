@@ -31,7 +31,11 @@
                 <img src="{{ $product->image_url }}" 
                      alt="{{ $product->name }}" 
                      class="img-fluid rounded shadow-sm w-100 mb-3" />
-                <favorite-button :product-id="{{ $product->id }}" class="mt-3 w-100" />
+                <favorite-button
+                    :product-id="{{ $product->id }}"
+                    :initial-favorite="{{ auth()->user()->favorites()->where('product_id', $product->id)->exists() ? 'true' : 'false' }}"
+                    class="mt-3 w-100"
+                />
             </div>
             <div class="col-md-8">
                 <h2 class="h2 d-flex align-items-center">
