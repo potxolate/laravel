@@ -24,7 +24,14 @@ $(document).ready(function() {
         ajax: '{{ route('categories.data') }}',
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },           
+            {
+                data: 'name',
+                name: 'name',
+                render: function(data, type, row) {
+                    // Aquí puedes modificar el enlace según la ruta que quieras
+                    return '<a href="{{ url('categories') }}/' + row.id + '">' + data + '</a>';
+                }
+            },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ]
     });
