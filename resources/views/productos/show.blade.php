@@ -56,7 +56,7 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <x-heroicon-o-shield-check style="width: 20px; height: 20px;" class="me-2" />
+                                            <i class="fas fa-link me-2"></i>
                                             <a href="{{ $link->url }}" class="text-decoration-none">
                                                 {{ $link->getDominioAttribute() }}
                                             </a>
