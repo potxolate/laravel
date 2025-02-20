@@ -13,20 +13,34 @@
         </div>
     </div>
     @foreach ($category->products->chunk(4) as $chunk)
-    <div class="row">
+    <div class="row gy-4">
         @foreach ($chunk as $product)
-        <div class="col-md-3 p-3 ">
-            <div class="thumbnail">
-                <div class="caption text-center">
-                    <a href="{{ route('product', $product->slug ?? '' ) }}"><img src="{{ $product->image_url }}" alt="product" class="img-thumbnail"></a>
-                    <h4 class="title m-1">
-                        <a href="{{ route('product', $product->slug ?? '' ) }}" class="text-inherit text-decoration-none">
-                            {{ $product->name }}
-                        </a>                        
-                    </h4>
-                </div> <!-- end caption -->
-            </div> <!-- end thumbnail -->
-        </div> <!-- end col-md-3 -->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card h-100 text-center shadow-sm border-0">
+                        <!-- Imagen del producto -->
+                        <a href="{{ route('product', $product->slug ?? '') }}">
+                            <img 
+                                src="{{ $product->image_url }}" 
+                                alt="{{ $product->name }}" 
+                                class="card-img-top img-thumbnail mx-auto"
+                                style="max-width: 200px; height: auto;">
+                        </a>
+                        
+                        <!-- Información del producto -->
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="{{ route('product', $product->slug ?? '') }}" 
+                                   class="text-decoration-none text-dark">
+                                    {{ $product->name }}
+        
+                                </a>
+                                <span class="ms-2 text-secondary">
+                                    <i class="fas fa-link"></i> {{ count($product->links) }}
+                                </span>
+                            </h6>                            
+                        </div>
+                    </div>
+                </div>
         @endforeach
     </div>
     @endforeach

@@ -3,7 +3,9 @@
     <Slide v-for="product in products" :key="product.id">      
       <div class="carousel__item px-md-2">
             <div class="caption text-center">
-                <a :href="'/product/' + product.slug"><img :src="product.image_url" :alt="product.name" class="img-thumbnail"></a>
+                <a :href="'/product/' + product.slug" class="text-decoration-none text-dark">
+                  <img :src="product.image_url" :alt="product.name" class="card-img-top img-thumbnail mx-auto">
+                </a>
                 <h3 class="h6">
                     <a :href="product.slug" class="text-inherit text-decoration-none">
                         {{ product.name }}
