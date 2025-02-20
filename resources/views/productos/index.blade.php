@@ -5,7 +5,7 @@
     <!-- Título y barra de búsqueda -->
     <div class="row mb-4">
         <div class="col text-center">
-            <h1 class="fw-bold">Productos</h1>
+            <h2 class="fw-bold">Productos</h2>
         </div>
         <div class="col-md-4 mx-auto">
             <form action="{{ route('products.search') }}" method="GET" class="d-flex">
@@ -32,12 +32,16 @@
                         
                         <!-- Información del producto -->
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h6 class="card-title">
                                 <a href="{{ route('product', $product->slug ?? '') }}" 
                                    class="text-decoration-none text-dark">
                                     {{ $product->name }}
+        
                                 </a>
-                            </h5>                            
+                                <span class="ms-2 text-secondary">
+                                    <i class="fas fa-link"></i> {{ count($product->links) }}
+                                </span>
+                            </h6>                            
                         </div>
                     </div>
                 </div>
