@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white text-center fs-5">
+                <div class="card-header bg-secundary text-success text-center fs-5">
                     {{ __('Dashboard') }}
                 </div>
                 <div class="card-body">
