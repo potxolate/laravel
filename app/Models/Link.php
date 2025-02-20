@@ -59,19 +59,24 @@ class Link extends Model
         $html = $this->fetchHtmlFromUrl();
         $crawler = new Crawler($html);
 
+        $price = null;
         try {
             switch ($priceSelector) {
                 case 'span[itemprop="price"]':
-                    return $crawler->filterXPath('//span[@itemprop="price"]')->attr('content');
+                    $price = $crawler->filterXPath('//span[@itemprop="price"]')->attr('content');
+                    break;
                 case 'meta':
-                    return $crawler->filterXPath('//meta[@itemprop="price"]')->attr('content');
+                    $price = $crawler->filterXPath('//meta[@itemprop="price"]')->attr('content');
+                    break;
                 default:
-                    return $crawler->filter($priceSelector)->first()->text();
+                    $price = $crawler->filter($priceSelector)->first()->text();
+                    break;
             }
         } catch (\InvalidArgumentException $e) {
             Log::warning("No se pudo encontrar el selector: {$priceSelector} en {$this->url}");
-            return null;
         }
+
+        return $price;
     }
 
     /**
