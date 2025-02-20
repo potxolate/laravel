@@ -51,7 +51,7 @@
                 @if (count($product->links) > 0)
                     <h5 class="fw-semibold mt-4">Compara precios:</h5>
                     <div class="row row-cols-1 row-cols-md-2 g-3">
-                        @foreach ($product->links as $link)
+                        @foreach ($product->links->sortBy('price') as $link)
                             <div class="col">
                                 <div class="card shadow-sm">
                                     <div class="card-body d-flex justify-content-between align-items-center">
