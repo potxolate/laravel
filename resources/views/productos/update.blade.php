@@ -65,12 +65,13 @@
 
             <!-- Añadir Enlace -->
             <div class="text-center">                
+                {{ Form::open(['url' => 'product/update/' . $product->id, 'method' => 'POST', 'class' => 'card p-4 shadow-sm']) }}            
                     @csrf
                     <div class="input-group w-80 mx-auto">
                         <input type="text" name="link" id="link" class="form-control" placeholder="Añadir nuevo enlace...">
                         <button type="submit" class="btn btn-success">Agregar Enlace</button>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>

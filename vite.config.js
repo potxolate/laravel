@@ -25,4 +25,22 @@ export default defineConfig({
             vue: 'vue/dist/vue.esm-bundler.js',
         },
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                quietDeps: true,
+                logger: {
+                    warn: (message, options) => {
+                        if (!options?.deprecation) return
+                        console.warn(message)
+                    }
+                }
+            }
+        }
+    },
+    server: {
+        host: '127.0.0.1', // o 'localhost'
+        port: 5174,
+        cors: true, // Habilita CORS
+    }
 });
