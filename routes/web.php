@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::delete('/products/{product}/links/{link}', [ProductosController::class, 'removeLink']) ->name('products.removeLink');
     Route::resource('admin/users', AdminController::class)->names([
         'index' => 'admin.users.index',
+        'show'=>'admin.users.show',
         'edit' => 'admin.users.edit',
         'destroy' => 'admin.users.destroy',
     ]);

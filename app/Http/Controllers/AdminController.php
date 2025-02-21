@@ -12,6 +12,12 @@ class AdminController extends Controller
         return view('users.index', compact('users'));
     }
 
+    // Mostrar un usuario
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
+    }
+    
     // Editar un usuario
     public function edit(User $user)
     {
@@ -25,4 +31,6 @@ class AdminController extends Controller
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado correctamente.');
     }
+
+
 }

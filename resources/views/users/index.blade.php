@@ -21,7 +21,11 @@
                     @forelse ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
+                            <td>
+                            <a href="{{ route('admin.users.show', $user->id) }}">
+                                {{ $user->name }}
+                            </a>                            
+                            </td>
                             <td>{{ $user->email }}</td>
                             <td>
                                 <span class="badge bg-{{ $user->role ? 'success' : 'secondary' }}">
